@@ -27,7 +27,7 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
 
   @override
   void initState() {
-    controller.initParts(widget.s.copyWith());
+    //controller.initParts(widget.s.copyWith());
     t = Timer.periodic(Duration(minutes: 2), (timer) => controller.saveSet());
     super.initState();
   }
@@ -72,7 +72,9 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
     );
 
     if (ret != null && ret != controller.filter) {
-      controller.filter = ret;
+      setState(() {
+        controller.filter = ret;
+      });
     }
   }
 
@@ -81,6 +83,7 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
 
         return UniversalPartCard(
           part: p,
+          cached: true,
           useTap: controller.useTap,
           useSecondaryButtons: controller.useSecondary,
           onTap: () => openPartDialog(p),
@@ -120,30 +123,38 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
           title: Text('Set ${widget.s.id}'),
           centerTitle: true,
         ),
-        body: Observer(
-          builder: (_) => ListView(
-            padding: EdgeInsets.all(8),
-            children: <Widget>[
-              CountSection(
-                null,
-                controller.parts,
-                buildCard,
-              ),
-              if (controller.showSpare)
-                CountSection(
-                  'Spare Parts',
-                  controller.spare,
-                  buildCard,
-                ),
-              if (controller.showOwned)
-                CountSection(
-                  'Complete',
-                  controller.owned,
-                  buildCard,
-                ),
-            ],
-          ),
-        ),
+        body: FutureBuilder<void>(
+            future: controller.initParts(widget.s),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return ListView(
+                padding: EdgeInsets.all(8),
+                children: <Widget>[
+                  CountSection(
+                    null,
+                    controller.parts,
+                    buildCard,
+                  ),
+                  if (controller.showSpare)
+                    CountSection(
+                      'Spare Parts',
+                      controller.spare,
+                      buildCard,
+                    ),
+                  if (controller.showOwned)
+                    CountSection(
+                      'Complete',
+                      controller.owned,
+                      buildCard,
+                    ),
+                ],
+              );
+            }),
       ),
     );
   }

@@ -13,37 +13,34 @@ mixin _$DiscoverController on _DiscoverControllerBase, Store {
 
   @override
   bool get isLoading {
-    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
-    _$isLoadingAtom.reportObserved();
+    _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
   set isLoading(bool value) {
-    _$isLoadingAtom.context.conditionallyRunInAction(() {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
-      _$isLoadingAtom.reportChanged();
-    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+    });
   }
 
   final _$pageCountAtom = Atom(name: '_DiscoverControllerBase.pageCount');
 
   @override
   int get pageCount {
-    _$pageCountAtom.context.enforceReadPolicy(_$pageCountAtom);
-    _$pageCountAtom.reportObserved();
+    _$pageCountAtom.reportRead();
     return super.pageCount;
   }
 
   @override
   set pageCount(int value) {
-    _$pageCountAtom.context.conditionallyRunInAction(() {
+    _$pageCountAtom.reportWrite(value, super.pageCount, () {
       super.pageCount = value;
-      _$pageCountAtom.reportChanged();
-    }, _$pageCountAtom, name: '${_$pageCountAtom.name}_set');
+    });
   }
 
-  final _$loadResultsAsyncAction = AsyncAction('loadResults');
+  final _$loadResultsAsyncAction =
+      AsyncAction('_DiscoverControllerBase.loadResults');
 
   @override
   Future<dynamic> loadResults(int count, [String s]) {
@@ -52,8 +49,9 @@ mixin _$DiscoverController on _DiscoverControllerBase, Store {
 
   @override
   String toString() {
-    final string =
-        'isLoading: ${isLoading.toString()},pageCount: ${pageCount.toString()}';
-    return '{$string}';
+    return '''
+isLoading: ${isLoading},
+pageCount: ${pageCount}
+    ''';
   }
 }

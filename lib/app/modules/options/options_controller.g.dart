@@ -13,68 +13,60 @@ mixin _$OptionsController on _OptionsControllerBase, Store {
 
   @override
   bool get useSecondary {
-    _$useSecondaryAtom.context.enforceReadPolicy(_$useSecondaryAtom);
-    _$useSecondaryAtom.reportObserved();
+    _$useSecondaryAtom.reportRead();
     return super.useSecondary;
   }
 
   @override
   set useSecondary(bool value) {
-    _$useSecondaryAtom.context.conditionallyRunInAction(() {
+    _$useSecondaryAtom.reportWrite(value, super.useSecondary, () {
       super.useSecondary = value;
-      _$useSecondaryAtom.reportChanged();
-    }, _$useSecondaryAtom, name: '${_$useSecondaryAtom.name}_set');
+    });
   }
 
   final _$useTapAtom = Atom(name: '_OptionsControllerBase.useTap');
 
   @override
   bool get useTap {
-    _$useTapAtom.context.enforceReadPolicy(_$useTapAtom);
-    _$useTapAtom.reportObserved();
+    _$useTapAtom.reportRead();
     return super.useTap;
   }
 
   @override
   set useTap(bool value) {
-    _$useTapAtom.context.conditionallyRunInAction(() {
+    _$useTapAtom.reportWrite(value, super.useTap, () {
       super.useTap = value;
-      _$useTapAtom.reportChanged();
-    }, _$useTapAtom, name: '${_$useTapAtom.name}_set');
+    });
   }
 
   final _$addAmountAtom = Atom(name: '_OptionsControllerBase.addAmount');
 
   @override
   int get addAmount {
-    _$addAmountAtom.context.enforceReadPolicy(_$addAmountAtom);
-    _$addAmountAtom.reportObserved();
+    _$addAmountAtom.reportRead();
     return super.addAmount;
   }
 
   @override
   set addAmount(int value) {
-    _$addAmountAtom.context.conditionallyRunInAction(() {
+    _$addAmountAtom.reportWrite(value, super.addAmount, () {
       super.addAmount = value;
-      _$addAmountAtom.reportChanged();
-    }, _$addAmountAtom, name: '${_$addAmountAtom.name}_set');
+    });
   }
 
   final _$showSpareAtom = Atom(name: '_OptionsControllerBase.showSpare');
 
   @override
   bool get showSpare {
-    _$showSpareAtom.context.enforceReadPolicy(_$showSpareAtom);
-    _$showSpareAtom.reportObserved();
+    _$showSpareAtom.reportRead();
     return super.showSpare;
   }
 
   @override
   set showSpare(bool value) {
-    _$showSpareAtom.context.conditionallyRunInAction(() {
+    _$showSpareAtom.reportWrite(value, super.showSpare, () {
       super.showSpare = value;
-      _$showSpareAtom.reportChanged();
-    }, _$showSpareAtom, name: '${_$showSpareAtom.name}_set');
+    });
   }
 
   final _$showCompletedAtom =
@@ -82,23 +74,25 @@ mixin _$OptionsController on _OptionsControllerBase, Store {
 
   @override
   bool get showCompleted {
-    _$showCompletedAtom.context.enforceReadPolicy(_$showCompletedAtom);
-    _$showCompletedAtom.reportObserved();
+    _$showCompletedAtom.reportRead();
     return super.showCompleted;
   }
 
   @override
   set showCompleted(bool value) {
-    _$showCompletedAtom.context.conditionallyRunInAction(() {
+    _$showCompletedAtom.reportWrite(value, super.showCompleted, () {
       super.showCompleted = value;
-      _$showCompletedAtom.reportChanged();
-    }, _$showCompletedAtom, name: '${_$showCompletedAtom.name}_set');
+    });
   }
 
   @override
   String toString() {
-    final string =
-        'useSecondary: ${useSecondary.toString()},useTap: ${useTap.toString()},addAmount: ${addAmount.toString()},showSpare: ${showSpare.toString()},showCompleted: ${showCompleted.toString()}';
-    return '{$string}';
+    return '''
+useSecondary: ${useSecondary},
+useTap: ${useTap},
+addAmount: ${addAmount},
+showSpare: ${showSpare},
+showCompleted: ${showCompleted}
+    ''';
   }
 }

@@ -13,20 +13,18 @@ mixin _$SetsController on _SetsControllerBase, Store {
 
   @override
   List<LegoSet> get sets {
-    _$setsAtom.context.enforceReadPolicy(_$setsAtom);
-    _$setsAtom.reportObserved();
+    _$setsAtom.reportRead();
     return super.sets;
   }
 
   @override
   set sets(List<LegoSet> value) {
-    _$setsAtom.context.conditionallyRunInAction(() {
+    _$setsAtom.reportWrite(value, super.sets, () {
       super.sets = value;
-      _$setsAtom.reportChanged();
-    }, _$setsAtom, name: '${_$setsAtom.name}_set');
+    });
   }
 
-  final _$getSetsAsyncAction = AsyncAction('getSets');
+  final _$getSetsAsyncAction = AsyncAction('_SetsControllerBase.getSets');
 
   @override
   Future<dynamic> getSets() {
@@ -35,7 +33,8 @@ mixin _$SetsController on _SetsControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'sets: ${sets.toString()}';
-    return '{$string}';
+    return '''
+sets: ${sets}
+    ''';
   }
 }

@@ -42,7 +42,6 @@ abstract class _SetControllerBase with Store {
     if (i == 1) {
       if (showSpare) {
         parts = s?.spareparts;
-        print('new parts');
         return;
       } else {
         i++;

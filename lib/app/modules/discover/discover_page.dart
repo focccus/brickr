@@ -101,10 +101,6 @@ class _DiscoverPageState
         ),
         body: LayoutBuilder(
           builder: (_, size) {
-            //controller.loadResults(searchController.text);
-
-            print(size.maxWidth);
-
             return Observer(
               builder: (_) {
                 if (controller.isLoading)

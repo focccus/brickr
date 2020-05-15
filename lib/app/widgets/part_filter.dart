@@ -52,7 +52,6 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   void done() {
-    print('done');
     final filter = PartFilter(
       text: controller.text.isNotEmpty ? controller.text : null,
       colors: List.from(selectedColors),

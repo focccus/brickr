@@ -13,114 +13,123 @@ mixin _$CounterController on _CounterControllerBase, Store {
 
   @override
   List<SetPart> get parts =>
-      (_$partsComputed ??= Computed<List<SetPart>>(() => super.parts)).value;
+      (_$partsComputed ??= Computed<List<SetPart>>(() => super.parts,
+              name: '_CounterControllerBase.parts'))
+          .value;
   Computed<List<SetPart>> _$spareComputed;
 
   @override
   List<SetPart> get spare =>
-      (_$spareComputed ??= Computed<List<SetPart>>(() => super.spare)).value;
+      (_$spareComputed ??= Computed<List<SetPart>>(() => super.spare,
+              name: '_CounterControllerBase.spare'))
+          .value;
   Computed<List<SetPart>> _$ownedComputed;
 
   @override
   List<SetPart> get owned =>
-      (_$ownedComputed ??= Computed<List<SetPart>>(() => super.owned)).value;
+      (_$ownedComputed ??= Computed<List<SetPart>>(() => super.owned,
+              name: '_CounterControllerBase.owned'))
+          .value;
   Computed<bool> _$showOwnedComputed;
 
   @override
   bool get showOwned =>
-      (_$showOwnedComputed ??= Computed<bool>(() => super.showOwned)).value;
+      (_$showOwnedComputed ??= Computed<bool>(() => super.showOwned,
+              name: '_CounterControllerBase.showOwned'))
+          .value;
   Computed<bool> _$showSpareComputed;
 
   @override
   bool get showSpare =>
-      (_$showSpareComputed ??= Computed<bool>(() => super.showSpare)).value;
+      (_$showSpareComputed ??= Computed<bool>(() => super.showSpare,
+              name: '_CounterControllerBase.showSpare'))
+          .value;
 
   final _$sAtom = Atom(name: '_CounterControllerBase.s');
 
   @override
   LegoSet get s {
-    _$sAtom.context.enforceReadPolicy(_$sAtom);
-    _$sAtom.reportObserved();
+    _$sAtom.reportRead();
     return super.s;
   }
 
   @override
   set s(LegoSet value) {
-    _$sAtom.context.conditionallyRunInAction(() {
+    _$sAtom.reportWrite(value, super.s, () {
       super.s = value;
-      _$sAtom.reportChanged();
-    }, _$sAtom, name: '${_$sAtom.name}_set');
+    });
   }
 
   final _$filterAtom = Atom(name: '_CounterControllerBase.filter');
 
   @override
   PartFilter get filter {
-    _$filterAtom.context.enforceReadPolicy(_$filterAtom);
-    _$filterAtom.reportObserved();
+    _$filterAtom.reportRead();
     return super.filter;
   }
 
   @override
   set filter(PartFilter value) {
-    _$filterAtom.context.conditionallyRunInAction(() {
+    _$filterAtom.reportWrite(value, super.filter, () {
       super.filter = value;
-      _$filterAtom.reportChanged();
-    }, _$filterAtom, name: '${_$filterAtom.name}_set');
+    });
   }
 
   final _$useSecondaryAtom = Atom(name: '_CounterControllerBase.useSecondary');
 
   @override
   bool get useSecondary {
-    _$useSecondaryAtom.context.enforceReadPolicy(_$useSecondaryAtom);
-    _$useSecondaryAtom.reportObserved();
+    _$useSecondaryAtom.reportRead();
     return super.useSecondary;
   }
 
   @override
   set useSecondary(bool value) {
-    _$useSecondaryAtom.context.conditionallyRunInAction(() {
+    _$useSecondaryAtom.reportWrite(value, super.useSecondary, () {
       super.useSecondary = value;
-      _$useSecondaryAtom.reportChanged();
-    }, _$useSecondaryAtom, name: '${_$useSecondaryAtom.name}_set');
+    });
   }
 
   final _$useTapAtom = Atom(name: '_CounterControllerBase.useTap');
 
   @override
   bool get useTap {
-    _$useTapAtom.context.enforceReadPolicy(_$useTapAtom);
-    _$useTapAtom.reportObserved();
+    _$useTapAtom.reportRead();
     return super.useTap;
   }
 
   @override
   set useTap(bool value) {
-    _$useTapAtom.context.conditionallyRunInAction(() {
+    _$useTapAtom.reportWrite(value, super.useTap, () {
       super.useTap = value;
-      _$useTapAtom.reportChanged();
-    }, _$useTapAtom, name: '${_$useTapAtom.name}_set');
+    });
   }
 
   final _$addAmountAtom = Atom(name: '_CounterControllerBase.addAmount');
 
   @override
   int get addAmount {
-    _$addAmountAtom.context.enforceReadPolicy(_$addAmountAtom);
-    _$addAmountAtom.reportObserved();
+    _$addAmountAtom.reportRead();
     return super.addAmount;
   }
 
   @override
   set addAmount(int value) {
-    _$addAmountAtom.context.conditionallyRunInAction(() {
+    _$addAmountAtom.reportWrite(value, super.addAmount, () {
       super.addAmount = value;
-      _$addAmountAtom.reportChanged();
-    }, _$addAmountAtom, name: '${_$addAmountAtom.name}_set');
+    });
   }
 
-  final _$initOptionsAsyncAction = AsyncAction('initOptions');
+  final _$initPartsAsyncAction =
+      AsyncAction('_CounterControllerBase.initParts');
+
+  @override
+  Future<void> initParts(LegoSet se) {
+    return _$initPartsAsyncAction.run(() => super.initParts(se));
+  }
+
+  final _$initOptionsAsyncAction =
+      AsyncAction('_CounterControllerBase.initOptions');
 
   @override
   Future<dynamic> initOptions() {
@@ -131,18 +140,9 @@ mixin _$CounterController on _CounterControllerBase, Store {
       ActionController(name: '_CounterControllerBase');
 
   @override
-  void initParts(LegoSet se) {
-    final _$actionInfo = _$_CounterControllerBaseActionController.startAction();
-    try {
-      return super.initParts(se);
-    } finally {
-      _$_CounterControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   bool addQuantity(SetPart p, [int q = 1]) {
-    final _$actionInfo = _$_CounterControllerBaseActionController.startAction();
+    final _$actionInfo = _$_CounterControllerBaseActionController.startAction(
+        name: '_CounterControllerBase.addQuantity');
     try {
       return super.addQuantity(p, q);
     } finally {
@@ -152,7 +152,8 @@ mixin _$CounterController on _CounterControllerBase, Store {
 
   @override
   void setQuantity(SetPart p, int q) {
-    final _$actionInfo = _$_CounterControllerBaseActionController.startAction();
+    final _$actionInfo = _$_CounterControllerBaseActionController.startAction(
+        name: '_CounterControllerBase.setQuantity');
     try {
       return super.setQuantity(p, q);
     } finally {
@@ -162,8 +163,17 @@ mixin _$CounterController on _CounterControllerBase, Store {
 
   @override
   String toString() {
-    final string =
-        's: ${s.toString()},filter: ${filter.toString()},useSecondary: ${useSecondary.toString()},useTap: ${useTap.toString()},addAmount: ${addAmount.toString()},parts: ${parts.toString()},spare: ${spare.toString()},owned: ${owned.toString()},showOwned: ${showOwned.toString()},showSpare: ${showSpare.toString()}';
-    return '{$string}';
+    return '''
+s: ${s},
+filter: ${filter},
+useSecondary: ${useSecondary},
+useTap: ${useTap},
+addAmount: ${addAmount},
+parts: ${parts},
+spare: ${spare},
+owned: ${owned},
+showOwned: ${showOwned},
+showSpare: ${showSpare}
+    ''';
   }
 }

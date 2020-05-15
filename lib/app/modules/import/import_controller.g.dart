@@ -13,39 +13,37 @@ mixin _$ImportController on _ImportControllerBase, Store {
 
   @override
   bool get status {
-    _$statusAtom.context.enforceReadPolicy(_$statusAtom);
-    _$statusAtom.reportObserved();
+    _$statusAtom.reportRead();
     return super.status;
   }
 
   @override
   set status(bool value) {
-    _$statusAtom.context.conditionallyRunInAction(() {
+    _$statusAtom.reportWrite(value, super.status, () {
       super.status = value;
-      _$statusAtom.reportChanged();
-    }, _$statusAtom, name: '${_$statusAtom.name}_set');
+    });
   }
 
   final _$errorAtom = Atom(name: '_ImportControllerBase.error');
 
   @override
   String get error {
-    _$errorAtom.context.enforceReadPolicy(_$errorAtom);
-    _$errorAtom.reportObserved();
+    _$errorAtom.reportRead();
     return super.error;
   }
 
   @override
   set error(String value) {
-    _$errorAtom.context.conditionallyRunInAction(() {
+    _$errorAtom.reportWrite(value, super.error, () {
       super.error = value;
-      _$errorAtom.reportChanged();
-    }, _$errorAtom, name: '${_$errorAtom.name}_set');
+    });
   }
 
   @override
   String toString() {
-    final string = 'status: ${status.toString()},error: ${error.toString()}';
-    return '{$string}';
+    return '''
+status: ${status},
+error: ${error}
+    ''';
   }
 }

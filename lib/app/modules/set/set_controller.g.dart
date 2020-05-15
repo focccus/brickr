@@ -13,65 +13,63 @@ mixin _$SetController on _SetControllerBase, Store {
 
   @override
   bool get showOwned =>
-      (_$showOwnedComputed ??= Computed<bool>(() => super.showOwned)).value;
+      (_$showOwnedComputed ??= Computed<bool>(() => super.showOwned,
+              name: '_SetControllerBase.showOwned'))
+          .value;
   Computed<bool> _$showSpareComputed;
 
   @override
   bool get showSpare =>
-      (_$showSpareComputed ??= Computed<bool>(() => super.showSpare)).value;
+      (_$showSpareComputed ??= Computed<bool>(() => super.showSpare,
+              name: '_SetControllerBase.showSpare'))
+          .value;
 
   final _$isLoadingAtom = Atom(name: '_SetControllerBase.isLoading');
 
   @override
   bool get isLoading {
-    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
-    _$isLoadingAtom.reportObserved();
+    _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
   set isLoading(bool value) {
-    _$isLoadingAtom.context.conditionallyRunInAction(() {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
-      _$isLoadingAtom.reportChanged();
-    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+    });
   }
 
   final _$cachedAtom = Atom(name: '_SetControllerBase.cached');
 
   @override
   bool get cached {
-    _$cachedAtom.context.enforceReadPolicy(_$cachedAtom);
-    _$cachedAtom.reportObserved();
+    _$cachedAtom.reportRead();
     return super.cached;
   }
 
   @override
   set cached(bool value) {
-    _$cachedAtom.context.conditionallyRunInAction(() {
+    _$cachedAtom.reportWrite(value, super.cached, () {
       super.cached = value;
-      _$cachedAtom.reportChanged();
-    }, _$cachedAtom, name: '${_$cachedAtom.name}_set');
+    });
   }
 
   final _$partsAtom = Atom(name: '_SetControllerBase.parts');
 
   @override
   List<SetPart> get parts {
-    _$partsAtom.context.enforceReadPolicy(_$partsAtom);
-    _$partsAtom.reportObserved();
+    _$partsAtom.reportRead();
     return super.parts;
   }
 
   @override
   set parts(List<SetPart> value) {
-    _$partsAtom.context.conditionallyRunInAction(() {
+    _$partsAtom.reportWrite(value, super.parts, () {
       super.parts = value;
-      _$partsAtom.reportChanged();
-    }, _$partsAtom, name: '${_$partsAtom.name}_set');
+    });
   }
 
-  final _$getSetAsyncAction = AsyncAction('getSet');
+  final _$getSetAsyncAction = AsyncAction('_SetControllerBase.getSet');
 
   @override
   Future<dynamic> getSet(LegoSet legoSet) {
@@ -83,7 +81,8 @@ mixin _$SetController on _SetControllerBase, Store {
 
   @override
   void changeTab(int i) {
-    final _$actionInfo = _$_SetControllerBaseActionController.startAction();
+    final _$actionInfo = _$_SetControllerBaseActionController.startAction(
+        name: '_SetControllerBase.changeTab');
     try {
       return super.changeTab(i);
     } finally {
@@ -93,8 +92,12 @@ mixin _$SetController on _SetControllerBase, Store {
 
   @override
   String toString() {
-    final string =
-        'isLoading: ${isLoading.toString()},cached: ${cached.toString()},parts: ${parts.toString()},showOwned: ${showOwned.toString()},showSpare: ${showSpare.toString()}';
-    return '{$string}';
+    return '''
+isLoading: ${isLoading},
+cached: ${cached},
+parts: ${parts},
+showOwned: ${showOwned},
+showSpare: ${showSpare}
+    ''';
   }
 }

@@ -26,6 +26,7 @@ dependencies:
   hive: 1.4.1+1
   hive_flutter: ^0.3.0+2
   flutter_file_dialog:
+  cached_network_image: 2.2.0+1
   flutter:
     sdk: flutter
 

@@ -38,7 +38,7 @@ class UniversalPartCard extends StatelessWidget {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: <Widget>[
-                PartImage(part),
+                PartImage(part, cached),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 4),
                   height: 20,

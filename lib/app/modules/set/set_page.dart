@@ -65,7 +65,6 @@ class _SetPageState extends ModularState<SetPage, SetController> {
     final isDesktop = MediaQuery.of(context).size.width >= 992;
 
     final details = Observer(builder: (_) {
-      print('rebuild');
       return DetailsCard(
         item: widget.s,
         cached: controller.cached,
@@ -134,6 +133,7 @@ class _SetPageState extends ModularState<SetPage, SetController> {
                               ?.map(
                                 (p) => UniversalPartCard(
                                   part: p,
+                                  cached: controller.cached,
                                 ),
                               )
                               ?.toList() ??

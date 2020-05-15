@@ -34,7 +34,8 @@ abstract class _CounterControllerBase with Store {
   int addAmount = 10;
 
   @action
-  void initParts(LegoSet se) {
+  Future<void> initParts(LegoSet se) async {
+    if (s != null) return;
     filter = PartFilter();
     s = se;
     se.parts.forEach((p) {
@@ -43,7 +44,8 @@ abstract class _CounterControllerBase with Store {
       }
     });
 
-    initOptions();
+    await initOptions();
+    await Future.delayed(Duration(milliseconds: 500));
   }
 
   @action

@@ -13,37 +13,34 @@ mixin _$PartsController on _PartsControllerBase, Store {
 
   @override
   ObservableList<String> get ids {
-    _$idsAtom.context.enforceReadPolicy(_$idsAtom);
-    _$idsAtom.reportObserved();
+    _$idsAtom.reportRead();
     return super.ids;
   }
 
   @override
   set ids(ObservableList<String> value) {
-    _$idsAtom.context.conditionallyRunInAction(() {
+    _$idsAtom.reportWrite(value, super.ids, () {
       super.ids = value;
-      _$idsAtom.reportChanged();
-    }, _$idsAtom, name: '${_$idsAtom.name}_set');
+    });
   }
 
   final _$isLoadingAtom = Atom(name: '_PartsControllerBase.isLoading');
 
   @override
   bool get isLoading {
-    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
-    _$isLoadingAtom.reportObserved();
+    _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
   set isLoading(bool value) {
-    _$isLoadingAtom.context.conditionallyRunInAction(() {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
-      _$isLoadingAtom.reportChanged();
-    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+    });
   }
 
-  final _$getPartIdsAsyncAction = AsyncAction('getPartIds');
+  final _$getPartIdsAsyncAction =
+      AsyncAction('_PartsControllerBase.getPartIds');
 
   @override
   Future<dynamic> getPartIds() {
@@ -52,7 +49,9 @@ mixin _$PartsController on _PartsControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'ids: ${ids.toString()},isLoading: ${isLoading.toString()}';
-    return '{$string}';
+    return '''
+ids: ${ids},
+isLoading: ${isLoading}
+    ''';
   }
 }

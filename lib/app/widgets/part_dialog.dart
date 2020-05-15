@@ -1,5 +1,5 @@
 import 'package:brickr/app/models/part.dart';
-import 'package:brickr/app/widgets/network_image.dart';
+import 'package:brickr/app/widgets/platform/export.dart';
 import 'package:fluix/fluix.dart';
 import 'package:flutter/material.dart';
 
@@ -64,9 +64,7 @@ class _PartDialogState extends State<PartDialog> {
       title: Text('Part ${widget.p.id}'),
       content: Column(
         children: [
-          Image(
-            image: NetworkImageWithRetry(widget.p.getPreview()),
-          ),
+          CustomImage(widget.p.getPreview()),
           Text(
             widget.p.id,
             style: theme.typography.h3,

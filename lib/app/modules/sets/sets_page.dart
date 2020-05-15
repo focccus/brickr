@@ -58,6 +58,7 @@ class _SetsPageState extends ModularState<SetsPage, SetsController> {
                 (s) => SetTile(
                   s: s,
                   onTap: () => pushAndReload('/set', s),
+                  cached: true,
                 ),
               ),
               AspectRatio(

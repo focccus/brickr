@@ -36,8 +36,6 @@ class _PartsPageState extends ModularState<PartsPage, PartsController> {
       ),
     );
 
-    print(ret);
-
     if (ret != null) {
       p = await controller.addQuantity(p, ret - prevQ);
       setState(() {});

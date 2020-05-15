@@ -19,8 +19,6 @@ abstract class _DiscoverControllerBase with Store {
 
   @action
   Future loadResults(int count, [String s]) async {
-    print('search $s');
-
     isLoading = true;
     pageCount = await api.getPageCount(s, 30);
 

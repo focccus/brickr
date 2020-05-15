@@ -45,6 +45,5 @@ class PartRepository {
 
     final json = s.toMap();
     await hive.put(s.id, json);
-    print('added ${s.id}');
   }
 }

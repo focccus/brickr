@@ -1,12 +1,13 @@
 import 'package:brickr/app/models/part.dart';
-import 'package:brickr/app/widgets/network_image.dart';
+import 'package:brickr/app/widgets/platform/export.dart';
 import 'package:fluix/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class PartImage extends StatelessWidget {
   final SetPart part;
+  final bool cached;
 
-  PartImage(this.part);
+  PartImage(this.part, this.cached);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,12 @@ class PartImage extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          Image.network(
+          CustomImage(
             part.part.getPreview(),
-            errorBuilder: (_, ex, s) => Center(
+            errorWidget: (_, __, ___) => Center(
               child: Text('Not available'),
             ),
+            cached: cached,
           ),
           if (part.part.length != null)
             Positioned(

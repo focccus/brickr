@@ -17,6 +17,5 @@ abstract class _SetsControllerBase with Store {
   @action
   Future getSets() async {
     sets = await repo.getAllSets();
-    print(sets);
   }
 }

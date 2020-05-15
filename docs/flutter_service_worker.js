@@ -25,7 +25,7 @@ const RESOURCES = {
 "assets/fonts/Lato-ThinItalic.ttf": "29f53f3450c6691e4195d082647aa8ca",
 "assets/fonts/LiquidIcons.ttf": "231c34dd27bba6b43abe0f66b9dcd5a0",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "c37a45d919835d40ffc4c8f48e4c65f2",
+"assets/LICENSE": "e2b7e64c6c04e78cf6e87748b1fa5554",
 "assets/packages/fluix/fonts/Lato-Black.ttf": "1233fdf19c04333c7f58af4eb8698452",
 "assets/packages/fluix/fonts/Lato-BlackItalic.ttf": "e0d428e2113a119814da366401ad3362",
 "assets/packages/fluix/fonts/Lato-Bold.ttf": "eb9532033c2adf99b1314611b5e9cd0e",
@@ -50,7 +50,7 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "index.html": "42a23f636f083d549a7a1d2b35d29334",
 "/": "42a23f636f083d549a7a1d2b35d29334",
-"main.dart.js": "40f48e1b0926c00155be4918e7c9410e",
+"main.dart.js": "f803f27edd6367da87696741c8bc25d5",
 "manifest.json": "88dab6fb3502f4fb489b1f9bb60bcf4e"
 };
 

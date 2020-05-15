@@ -21,14 +21,10 @@ abstract class _PartsControllerBase with Store {
   Future getPartIds() async {
     isLoading = true;
     ids = ObservableList.of(await repo.getIDs());
-    print(ids);
     isLoading = false;
   }
 
   Future<Part> addQuantity(Part p, int q) async {
-    print(q);
-    print(p.quantity);
-
     p = p.copyWith(quantity: (p.quantity ?? 0) + q, owned: (p.owned ?? 0) + q);
     await repo.savePart(p);
     return p;

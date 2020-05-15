@@ -40,7 +40,6 @@ class RebrickableAPI {
   }
 
   Future<List<LegoSet>> searchSets(int page, String search, int size) async {
-    print(page);
     try {
       final res = await dio.get(
         'sets',

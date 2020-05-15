@@ -1,4 +1,5 @@
 import 'package:brickr/app/models/preview_set.dart';
+import 'package:brickr/app/widgets/platform/export.dart';
 import 'package:fluix/fluix.dart';
 import 'package:flutter/material.dart';
 
@@ -34,8 +35,9 @@ class DetailsCard extends StatelessWidget {
     Column horizontal(double w) => Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(
+            CustomImage(
               item.img,
+              cached: cached,
               width: w / 2,
             ),
             content,
