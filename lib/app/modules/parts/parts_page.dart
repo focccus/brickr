@@ -59,7 +59,7 @@ class _PartsPageState extends ModularState<PartsPage, PartsController> {
 
                 return FluidListItem(
                   leading: Image.network(p.getPreview()),
-                  title: Text(p.name + ' (${p.id})'),
+                  title: Text(p.name + ' (${p.formattedId})'),
                   trailing: Text((p.owned ?? 0).toString()),
                   onTap: () => openDialog(p),
                 );

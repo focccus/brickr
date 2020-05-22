@@ -66,7 +66,7 @@ class _PartDialogState extends State<PartDialog> {
         children: [
           CustomImage(widget.p.getPreview()),
           Text(
-            widget.p.id,
+            widget.p.formattedId,
             style: theme.typography.h3,
           ),
           Text(

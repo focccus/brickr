@@ -128,6 +128,8 @@ abstract class _SetControllerBase with Store {
 
       assert(data != null);
 
+      print(data);
+
       List<SetPart> parts = data
           .where((p) => p['is_spare'] == null || p['is_spare'] == false)
           .map((p) => SetPart.fromMap(p).copyWith(part: Part.fromMap(p)))
@@ -140,7 +142,9 @@ abstract class _SetControllerBase with Store {
       this.parts = parts ?? [];
 
       s = s.copyWith(parts: parts, spareparts: spare);
-    } catch (err) {}
+    } catch (err) {
+      print(err);
+    }
   }
 
   List<SetPart> getPartsRow(int row, int count) {

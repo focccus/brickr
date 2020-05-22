@@ -24,6 +24,7 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
   //use 'controller' variable to access controller
 
   Timer t;
+  bool loading = true;
 
   @override
   void initState() {
@@ -34,7 +35,14 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
 
   @override
   void didChangeDependencies() {
-    if (widget.s == null) Navigator.pop(context);
+    if (widget.s == null) return Navigator.pop(context);
+
+    controller.initParts(widget.s).then((value) {
+      setState(() {
+        loading = false;
+      });
+    });
+
     super.didChangeDependencies();
   }
 
@@ -78,22 +86,15 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
     }
   }
 
-  Widget buildCard(SetPart p) => StatefulBuilder(builder: (_, st) {
-        void state(bool v) => v ? setState(() {}) : st(() {});
-
-        return UniversalPartCard(
-          part: p,
-          cached: true,
-          useTap: controller.useTap,
-          useSecondaryButtons: controller.useSecondary,
-          onTap: () => openPartDialog(p),
-          onAdd: () => state(controller.addQuantity(p)),
-          onAdd2: () => state(controller.addQuantity(p, controller.addAmount)),
-          onSubtract: () => state(controller.addQuantity(p, -1)),
-          onSubtract2: () =>
-              state(controller.addQuantity(p, -controller.addAmount)),
-        );
-      });
+  Widget buildCard(SetPart p) => StatefulCard(
+        p: p,
+        useTap: controller.useTap,
+        useSecondaryButtons: controller.useSecondary,
+        addAmount: controller.addAmount,
+        onTap: () => openPartDialog(p),
+        addQuantity: controller.addQuantity,
+        updateAll: () => setState(() {}),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -123,16 +124,11 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
           title: Text('Set ${widget.s.id}'),
           centerTitle: true,
         ),
-        body: FutureBuilder<void>(
-            future: controller.initParts(widget.s),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              return ListView(
+        body: loading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView(
                 padding: EdgeInsets.all(8),
                 children: <Widget>[
                   CountSection(
@@ -153,9 +149,55 @@ class _CounterPageState extends ModularState<CounterPage, CounterController> {
                       buildCard,
                     ),
                 ],
-              );
-            }),
+              ),
       ),
+    );
+  }
+}
+
+class StatefulCard extends StatefulWidget {
+  final bool useTap;
+  final bool useSecondaryButtons;
+  final int addAmount;
+  final SetPart p;
+  final VoidCallback onTap;
+  final VoidCallback updateAll;
+  final bool Function(SetPart, int) addQuantity;
+
+  const StatefulCard({
+    Key key,
+    this.useTap,
+    this.useSecondaryButtons,
+    this.p,
+    this.onTap,
+    this.updateAll,
+    this.addQuantity,
+    this.addAmount,
+  }) : super(key: key);
+
+  @override
+  _StatefulCardState createState() => _StatefulCardState();
+}
+
+class _StatefulCardState extends State<StatefulCard> {
+  void state(bool v) {
+    if (v) widget.updateAll();
+
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return UniversalPartCard(
+      part: widget.p,
+      cached: true,
+      useTap: widget.useTap,
+      useSecondaryButtons: widget.useSecondaryButtons,
+      onTap: widget.onTap,
+      onAdd: () => state(widget.addQuantity(widget.p, 1)),
+      onAdd2: () => state(widget.addQuantity(widget.p, widget.addAmount)),
+      onSubtract: () => state(widget.addQuantity(widget.p, -1)),
+      onSubtract2: () => state(widget.addQuantity(widget.p, -widget.addAmount)),
     );
   }
 }

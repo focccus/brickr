@@ -37,6 +37,7 @@ dev_dependencies:
   mockito: ^4.1.1
   mobx_codegen: ^1.0.3
   build_runner: ^1.8.0
+  flutter_launcher_icons: "^0.7.3"
   # flutter_test:
   #   sdk: flutter
 scripts:
@@ -45,6 +46,12 @@ scripts:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "icons/icon512.png"
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -31,7 +31,7 @@ abstract class _ImportControllerBase with Store {
     final counts = <String, SetPart>{};
 
     for (var part in [...s.parts, ...s.spareparts]) {
-      counts[part.id + part.quantity.toString()] = part;
+      counts[part.formattedId + part.quantity.toString()] = part;
     }
 
     try {
@@ -43,22 +43,21 @@ abstract class _ImportControllerBase with Store {
           .where((p) => p['is_spare'] == null || p['is_spare'] == false)
           .map(
             (p) => SetPart.fromMap(p).copyWith(
-                part: Part.fromMap(p),
-                owned: counts[p['part']['part_num'] +
-                        p['part']['quantity'].toString()]
-                    ?.owned),
+              part: Part.fromMap(p),
+            ),
           )
+          .map((p) => p.copyWith(
+              owned: counts[p.formattedId + p.quantity.toString()]?.owned))
           .toList();
       List<SetPart> spare = data
           .where((p) => p['is_spare'] != null && p['is_spare'])
           .map(
             (p) => SetPart.fromMap(p).copyWith(
               part: Part.fromMap(p),
-              owned: counts[
-                      p['part']['part_num'] + p['part']['quantity'].toString()]
-                  ?.owned,
             ),
           )
+          .map((p) => p.copyWith(
+              owned: counts[p.formattedId + p.quantity.toString()]?.owned))
           .toList();
 
       s = s.copyWith(parts: parts, spareparts: spare);

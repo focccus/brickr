@@ -26,6 +26,8 @@ class Part {
         '/${size}x$size.jpg';
   }
 
+  String get formattedId => id.split(':').first;
+
   Part copyWith({
     String id,
     String name,
@@ -64,6 +66,13 @@ class Part {
     final p = map['part'] ?? map;
     final c = map['color'] ?? map;
 
+    String id = p['part_num'];
+
+    if (c['id'] != null) {
+      // add color id
+      id += ':' + c['id'].toString();
+    }
+
     String name = p['name'];
     double length = p['length'];
 
@@ -80,7 +89,7 @@ class Part {
     }
 
     return Part(
-      id: p['part_num'],
+      id: id,
       name: name,
       img: p['part_img_url'],
       length: length,
@@ -144,12 +153,14 @@ class SetPart {
     Part part,
   }) {
     return SetPart(
-      id: id ?? this.id,
+      id: id ?? part?.id ?? this.id,
       quantity: quantity ?? this.quantity,
       owned: owned ?? this.owned,
       part: part ?? this.part,
     );
   }
+
+  String get formattedId => id.split(':').first;
 
   Map<String, dynamic> toMap() {
     return {

@@ -25,7 +25,7 @@ const RESOURCES = {
 "assets/fonts/Lato-ThinItalic.ttf": "29f53f3450c6691e4195d082647aa8ca",
 "assets/fonts/LiquidIcons.ttf": "231c34dd27bba6b43abe0f66b9dcd5a0",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "e2b7e64c6c04e78cf6e87748b1fa5554",
+"assets/LICENSE": "3636b4a3028a716a5172e302f6b1988d",
 "assets/packages/fluix/fonts/Lato-Black.ttf": "1233fdf19c04333c7f58af4eb8698452",
 "assets/packages/fluix/fonts/Lato-BlackItalic.ttf": "e0d428e2113a119814da366401ad3362",
 "assets/packages/fluix/fonts/Lato-Bold.ttf": "eb9532033c2adf99b1314611b5e9cd0e",
@@ -45,13 +45,13 @@ const RESOURCES = {
 "assets/packages/fluix/fonts/Lato-Thin.ttf": "eb1635403cd764912ca1e0af78735797",
 "assets/packages/fluix/fonts/Lato-ThinItalic.ttf": "29f53f3450c6691e4195d082647aa8ca",
 "assets/packages/fluix/fonts/LiquidIcons.ttf": "231c34dd27bba6b43abe0f66b9dcd5a0",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
-"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
+"favicon.png": "d0e448f298699e5be51c25b8817420e4",
+"icons/Icon-192.png": "5f01e78190812bec8d5028cac6462eb8",
+"icons/Icon-512.png": "a848085081d522502b8cd9a33f283f15",
 "index.html": "42a23f636f083d549a7a1d2b35d29334",
 "/": "42a23f636f083d549a7a1d2b35d29334",
-"main.dart.js": "f803f27edd6367da87696741c8bc25d5",
-"manifest.json": "88dab6fb3502f4fb489b1f9bb60bcf4e"
+"main.dart.js": "56689e9a9ff4e561d51c0bea0a7280a0",
+"manifest.json": "4308c465410048feb55e2772388062d2"
 };
 
 // The application shell files that are downloaded before a service worker can
