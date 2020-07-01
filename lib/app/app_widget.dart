@@ -9,9 +9,9 @@ class AppWidget extends StatelessWidget {
       data: FluidTheme.vibrantCyan,
       child: MaterialApp(
         navigatorKey: Modular.navigatorKey,
-        title: 'Flutter Slidy',
+        title: 'brickr',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Liquids.vibrantCyan.dark,
         ),
         initialRoute: '/',
         onGenerateRoute: Modular.generateRoute,
